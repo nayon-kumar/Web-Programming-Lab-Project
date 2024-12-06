@@ -23,9 +23,9 @@
                     <li><a href="#">ABOUT</a></li>
                     <li><a href="#">SERVICES</a></li>
                     <li><a href="#">GALLERY</a></li>
-                    <li><a href="#">MENU</a></li>
-                    <li><a href="#">PAGES</a></li>
+                    <li><a href="#">MENU</a></li>                    
                     <li><a href="#">CONTACT</a></li>
+                    <li><a href="login.php">LOGIN</a></li>
                 </ul>
             </div>
         </div>
