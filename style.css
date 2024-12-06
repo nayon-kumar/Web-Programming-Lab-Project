@@ -1,0 +1,301 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.headerArea{
+    height: 100px;
+    background-color: #000000;
+    position: fixed;
+    width: 100%;
+    opacity: 0.8;
+    grid-area: h;
+}
+.logo{
+    float: left;
+}
+.logo img{
+    height: 50px;
+    margin-top: 25px;
+    margin-left: 100px;
+    float: left;
+}
+a{
+    text-decoration: none;
+}
+.logo a{
+    color: white;
+    font-size: 30px;
+}
+#spicy{
+    display: inline-block;
+    margin-top: 33px;
+    margin-left: 20px;
+}
+.menu{
+    float: right;
+    margin-top: 25px;
+    margin-right: 100px;
+}
+ul{
+    list-style: none;
+}
+ul li{
+    float: left;
+    padding: 15px;   
+}
+li:hover{
+    background-color: #990000;
+    border-radius: 10px;
+}
+li a{
+    color: #FFFFFF;
+    
+}
+
+.bannerArea{
+    background: url(images/burger.jpg);
+    margin-top: 100px;
+    height: 600px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    grid-area: b;
+}
+.bannerArea h1{
+    font-size: 50px;
+    line-height: 100px;
+}
+.bannerArea h3{
+    font-size: 30px;
+}
+.bannerArea h1, h3{
+    text-align: center;
+    color: white;
+}
+#hd{
+    margin-top: 100px;
+}
+.bannerArea img{
+    display: block;
+    width: 70px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+.aboutUs{
+    grid-area: au;
+    margin-top: 20px;
+}
+.aboutUs h1{
+    color: #990018;
+    margin: 30px;
+    text-align: center;
+}
+.aboutUs p{
+    padding: 20px;
+    text-align: justify;
+}
+.aboutImg{
+    margin-top: 50px;
+    grid-area: ai;
+}
+.breakfast{
+    grid-area: bf;
+    height: 250px;
+}
+.lunch{
+    grid-area: l;
+    height: 250px;
+}
+.dinner{
+    grid-area: d;
+    height: 250px;
+}
+.breakfast img{
+    height: 100%;
+    width: 100%;
+}
+.lunch img{
+    height: 100%;
+    width: 100%;
+}
+.dinner img{
+    height: 100%;
+    width: 100%;
+}
+.wraper{
+    background-color: gray;
+    text-align: center;
+    padding: 20px;
+    transition-duration: 0.5s;
+}
+.wraper:hover{
+    background-color: black;
+}
+.wraper p{
+    color: white;
+    margin: 10px;
+}
+.wraper a{
+    display: inline-block;
+    margin-top: 10px;
+    color: white;
+    background-color: green;
+    padding: 10px 40px;
+    border-radius: 7px;
+}
+.foodHeader{
+    grid-area: fh;
+    text-align: center;
+}
+.foodHeader h1{
+    margin-bottom: 20px;
+    color: #990018;;
+}
+.food{
+    margin-top: 20px;
+    display: grid;
+    grid-area: f;
+    grid-template-columns: auto auto auto;
+    grid-template-areas: 
+        'fh fh fh'
+        'bf l d'
+    ;
+}
+.food div{
+    margin: 0px 5px;
+}
+.dishHead{
+    grid-area: dh;
+}
+.dishHead h1{
+    text-align: center;
+    margin-top: 20px;
+    color: white;
+}
+.item1{
+    grid-area: i1;
+}
+.item2{
+    grid-area: i2;
+}
+.item3{
+    grid-area: i3;
+}
+.dish a{
+    display: inline-block;
+    color: white;
+    background-color: green;
+    padding: 10px 40px;
+    border-radius: 7px;
+    margin-left: 40px;
+    transition-duration: 0.5s;
+}
+.dish a:hover{
+    background-color: blue;
+}
+.dish{
+    text-align: center;
+    margin-top: 200px;
+    grid-area: d;
+    height: 500px;
+    background: url(images/wood.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: grid;
+    grid-template-areas: 
+        'dh dh dh'
+        'i1 i2 i3'
+    ;
+}
+.leftSide{
+    grid-area: ls;
+    padding: 50px 0px 50px 200px;
+}
+.rightSide{
+    grid-area: rs;
+    padding: 50px 0px;
+}
+.rightSide h3{
+    text-align: left;
+    padding-bottom: 25px;
+}
+.rightSide p{
+    color: white;
+    padding: 7px 0px;
+}
+#last{
+    margin-bottom: 50px;
+}
+.leftSide input, textarea{
+    display: block;
+    width: 300px;
+    margin: 10px 0px;
+    padding: 5px 0px;
+    border-radius: 7px;
+    background-color: rgb(41, 41, 41);
+    border: 2px solid white;
+    color: white;
+}
+label{
+    color: white;
+}
+input[type="submit"]{
+    transition-duration: 0.5s;
+}
+input[type="submit"]:hover{
+    background-color: green;
+    border-color: transparent;
+}
+.footer1{
+    margin-top: 10px;
+    grid-area: f1;
+    background-color: rgb(41, 41, 41);
+    display: grid;
+    grid-template-areas: 
+        'ls rs'
+    ;
+}
+.left{
+    grid-area: ll;
+}
+.right{
+    grid-area: rr;
+}
+.footer2{
+    grid-area: f2;
+    background-color: black;
+    color: white;
+    height: 50px;
+    display: grid;
+    grid-template-areas: 
+        'll rr'
+    ;
+}
+.footer2 p{
+    margin-top: 10px;
+    margin-left: 50px;
+}
+i{
+    padding: 10px;
+    margin-top: 5px;
+    color: white;
+    transition-duration: 0.5s;
+}
+i:hover{
+    color: aqua;
+}
+.totalContainer{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-template-areas: 
+        'h h h h'
+        'b b b b'
+        'f f f f'
+        'd d d d'
+        'au au ai ai'
+        'f1 f1 f1 f1'
+        'f2 f2 f2 f2'
+    ;
+}
