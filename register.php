@@ -27,3 +27,33 @@
   </div>
 </body>
 </html>
+
+<?php
+$conn = new mysqli('localhost', 'root', '', 'spicy_restaurant');
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = $conn->real_escape_string($_POST['username']);
+    $password = $_POST['password'];
+
+    $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
+    $sql = "INSERT INTO users (username, password) VALUES ('$username', '$hashedPassword')";
+    if ($conn->query($sql) === TRUE) {
+        echo "<script>
+                alert('Registration successful!');
+                window.location.href = 'login.php';
+              </script>";
+    } else {
+        echo "<script>
+                alert('Error: Unable to register. Username might already be taken.');
+                window.location.href = 'register.php';
+              </script>";
+    }
+}
+
+$conn->close();
+?>

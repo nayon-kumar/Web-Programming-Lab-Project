@@ -27,3 +27,42 @@
   </div>
 </body>
 </html>
+
+<?php
+
+$conn = new mysqli('localhost', 'root', '', 'spicy_restaurant');
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = $conn->real_escape_string($_POST['username']);
+    $password = $_POST['password'];
+
+    $sql = "SELECT * FROM users WHERE username='$username'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $user = $result->fetch_assoc();
+        if (password_verify($password, $user['password'])) {
+            echo "<script>
+                    alert('Login successful!');
+                    window.location.href = 'index.php';
+                  </script>";
+        } else {
+            echo "<script>
+                    alert('Invalid password.');
+                    window.location.href = 'login.php';
+                  </script>";
+        }
+    } else {
+        echo "<script>
+                alert('User not found.');
+                window.location.href = 'login.php';
+              </script>";
+    }
+}
+
+$conn->close();
+?>

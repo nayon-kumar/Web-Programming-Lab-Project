@@ -12,33 +12,31 @@
     <div class="totalContainer">
         <div class="headerArea">
             <div class="logo">
-                <a href="#">
+                <a href="index.php">
                     <img src="images/logo.png" alt="Logo">
                 </a>
-                <a href="#" id="spicy">Spicy</a>
+                <a href="index.php" id="spicy">Spicy</a>
             </div>
             <div class="menu">
                 <ul>
-                    <li><a href="#">HOME</a></li>
-                    <li><a href="#">ABOUT</a></li>
-                    <li><a href="#">SERVICES</a></li>
-                    <li><a href="#">GALLERY</a></li>
-                    <li><a href="#">MENU</a></li>                    
-                    <li><a href="#">CONTACT</a></li>
+                    <li><a href="#home" id="hh">HOME</a></li>
+                    <li><a href="#aboutUs" id="aa">ABOUT</a></li>
+                    <li><a href="#gallery" id="gg">GALLERY</a></li>         
+                    <li><a href="#contact" id="cc">CONTACT</a></li>
                     <li><a href="login.php">LOGIN</a></li>
                 </ul>
             </div>
         </div>
-        <div class="bannerArea">
+        <div class="bannerArea" id="home">
             <h1 id="hd">We Serve Healthy</h1>
             <h1>Tasty Food</h1>
             <h3>Hot, Tasty and Spicy</h3>
-            <a href="#"><img src="images/fork.png" alt=""></a>
+            <a href="index.php"><img src="images/fork.png" alt=""></a>
         </div>
         
 
 
-        <div class="food">
+        <div class="food" id="gallery">
             <div class="foodHeader">
                 <h1>Food Gallery</h1>
             </div>
@@ -85,7 +83,7 @@
             </div>
         </div>
 
-        <div class="aboutUs">
+        <div class="aboutUs" id="aboutUs">
             <h1>About Us</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni dolor, possimus omnis ea numquam deleniti, tempora debitis saepe commodi explicabo eum laudantium! Veniam blanditiis corrupti iusto nesciunt dolorem eligendi quia, quibusdam repellat repellendus nemo delectus velit ipsam fugiat maxime! Vero eius, accusamus incidunt unde error dolor expedita sint. Ea, provident! Quas illum harum ipsam fuga hic doloribus fugiat quasi reprehenderit. Facilis eum delectus quas ad vitae, laudantium magni eveniet assumenda minima necessitatibus illum praesentium error ducimus recusandae? Vel blanditiis esse harum, dolor in tenetur assumenda quam reiciendis sequi, quod at. Reiciendis cumque ut architecto ad iste ex eos ullam, animi ipsam. Cupiditate accusantium commodi dolore eum iure, minima ab vitae iste! Aut nostrum sed eaque voluptatum, necessitatibus velit facere magni incidunt reprehenderit quos suscipit odio natus. Quam est illo maxime fugiat accusamus neque cum facere esse dignissimos ab molestias sunt aliquam, fuga odit beatae quasi ducimus eius, voluptate sequi quaerat suscipit? Laboriosam numquam, fugit deleniti ex sapiente ab temporibus natus magni rerum cumque sequi commodi. Inventore cumque officiis, quaerat quas perspiciatis vitae ullam! Pariatur necessitatibus odio deleniti voluptatem laborum hic commodi mollitia vel magnam dolorem praesentium, laboriosam nam? Neque voluptatem alias nostrum, asperiores consectetur labore tenetur exercitationem. Minima, labore tempora!</p>
         </div>
@@ -95,17 +93,65 @@
 
         <div class="footer1">
             <div class="leftSide">
-                <form>
+
+                <form method="POST" action="">
                     <label for="name">Name</label>
-                    <input type="text" id="name">
+                    <input type="text" id="name" name="name" required>
+
                     <label for="email">Email</label>
-                    <input type="email" id="email">
+                    <input type="email" id="email" name="email" required>
+
                     <label for="phone">Phone Number</label>
-                    <input type="text" id="phone">
+                    <input type="text" id="phone" name="phone" required>
+
                     <label for="message">Your Message</label>
-                    <textarea id="message"></textarea>
+                    <textarea id="message" name="message" required></textarea>
+
                     <input type="submit" value="Submit">
+                    <?php if (!empty($error)): ?>
+                        <p class="error"><?= $error ?></p>
+                    <?php endif; ?>
                 </form>
+
+<?php
+    $host = 'localhost';
+    $dbname = 'spicy_restaurant';
+    $username = 'root'; 
+    $password = '';     
+    $error = '';
+
+    try {
+        $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $name = trim($_POST['name']);
+            $email = trim($_POST['email']);
+            $phone = trim($_POST['phone']);
+            $message = trim($_POST['message']);
+
+            if (empty($name) || empty($email) || empty($phone) || empty($message)) {
+                $error = "All fields are required.";
+            } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $error = "Please enter a valid email address.";
+            } else {
+                $sql = "INSERT INTO contacts (name, email, phone, message) VALUES (:name, :email, :phone, :message)";
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute([
+                    ':name'    => htmlspecialchars($name),
+                    ':email'   => htmlspecialchars($email),
+                    ':phone'   => htmlspecialchars($phone),
+                    ':message' => htmlspecialchars($message)
+                ]);
+
+                echo "<script>alert('Thank you for your message!');</script>";
+            }
+        }
+    } catch (PDOException $e) {
+        $error = "Database connection failed: " . $e->getMessage();
+    }
+?>
+
             </div>
             <div class="rightSide">
                 <h3>Call for Book</h3>
@@ -116,7 +162,7 @@
                 <p>Dhaka, Bangladesh</p>
             </div>
         </div>
-        <div class="footer2">
+        <div class="footer2" id="contact">
             <div class="left">
                 <p>Copyright © Spicy - 2024. All Rights Reserved By Sree Nayon Kumar Pal.</p>
             </div>
@@ -132,5 +178,33 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('cc').addEventListener('click', function(e) {
+            e.preventDefault(); 
+            document.querySelector('#contact').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+        document.getElementById('aa').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('#aboutUs').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+        document.getElementById('gg').addEventListener('click', function(e) {
+            e.preventDefault(); 
+            document.querySelector('#gallery').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+        document.getElementById('hh').addEventListener('click', function(e) {
+            e.preventDefault(); 
+            document.querySelector('#home').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    </script>
+
 </body>
 </html>
